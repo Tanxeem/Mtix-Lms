@@ -71,20 +71,20 @@ A comprehensive Learning Management System with role-based access control for ad
 - DNS & CDN: Cloudflare
 
 # POSTGRES SCHEMA 
-* enum Role {
+### enum Role {
   ADMIN
   TEACHER
   STUDENT
 }
 
-* enum FeeStatus {
+### enum FeeStatus {
   PENDING
   PAID
   OVERDUE
   CANCELLED
 }
 
-* model User {
+### model User {
 -  id            String     @id @default(uuid())
 -  email         String     @unique
 -  passwordHash  String
@@ -102,7 +102,7 @@ A comprehensive Learning Management System with role-based access control for ad
 -  auditLogs     AuditLog[]
 }
 
-* model RefreshToken {
+### model RefreshToken {
 -  id        String   @id @default(uuid())
 -  token     String   @unique
 -  userId    String
@@ -111,7 +111,7 @@ A comprehensive Learning Management System with role-based access control for ad
 -  createdAt DateTime @default(now())
 }
 
-* model Student {
+### model Student {
 -  id          String     @id @default(uuid())
 -  userId      String     @unique
 -  user        User       @relation(fields: [userId], references: [id])
@@ -127,7 +127,7 @@ A comprehensive Learning Management System with role-based access control for ad
 -  submissions Submission[]
 }
 
-* model Teacher {
+### model Teacher {
 -  id           String     @id @default(uuid())
 -  userId       String     @unique
 -  user         User       @relation(fields: [userId], references: [id])
@@ -140,7 +140,7 @@ A comprehensive Learning Management System with role-based access control for ad
 -  assignments  Assignment[]
 }
 
-* model Class {
+### model Class {
 -  id          String     @id @default(uuid())
  - name        String
 -  gradeLevel  Int
@@ -153,7 +153,7 @@ A comprehensive Learning Management System with role-based access control for ad
 -  assignments Assignment[]
 }
 
-* model Subject {
+### model Subject {
 -  id          String     @id @default(uuid())
 -  name        String
 -  code        String     @unique
@@ -164,7 +164,7 @@ A comprehensive Learning Management System with role-based access control for ad
 -  assignments Assignment[]
 }
 
-* model Lecture {
+### model Lecture {
 -  id          String     @id @default(uuid())
 -  title       String
 -  description String?
@@ -181,7 +181,7 @@ A comprehensive Learning Management System with role-based access control for ad
 -  assignments Assignment[]
 }
 
-* model Assignment {
+### model Assignment {
 -  id          String     @id @default(uuid())
 -  title       String
  - description String
@@ -198,7 +198,7 @@ A comprehensive Learning Management System with role-based access control for ad
 -  createdAt   DateTime   @default(now())
 }
 
-* model Submission {
+### model Submission {
 -  id           String     @id @default(uuid())
 -  assignmentId String
 -  assignment   Assignment @relation(fields: [assignmentId], references: [id])
@@ -211,7 +211,7 @@ A comprehensive Learning Management System with role-based access control for ad
 -  gradedAt     DateTime?
 }
 
-* model Fee {
+### model Fee {
 -  id          String     @id @default(uuid())
 -  studentId   String
 -  student     Student    @relation(fields: [studentId], references: [id])
@@ -226,7 +226,7 @@ A comprehensive Learning Management System with role-based access control for ad
 -  updatedAt   DateTime   @updatedAt
 }
 
-* model Attendance {
+### model Attendance {
 -  id         String   @id @default(uuid())
 -  studentId  String
 -  student    Student  @relation(fields: [studentId], references: [id])
@@ -236,7 +236,7 @@ A comprehensive Learning Management System with role-based access control for ad
 -  remarks    String?
 }
 
-* model Notification {
+### model Notification {
 -  id        String   @id @default(uuid())
 -  userId    String
 -  user      User     @relation(fields: [userId], references: [id])
@@ -247,7 +247,7 @@ A comprehensive Learning Management System with role-based access control for ad
 -  link      String?
 }
 
-* model AuditLog {
+### model AuditLog {
 -  id          String   @id @default(uuid())
 -  userId      String?
 -  user        User?    @relation(fields: [userId], references: [id])
@@ -260,7 +260,7 @@ A comprehensive Learning Management System with role-based access control for ad
 -  createdAt   DateTime @default(now())
 }
 
-* model SystemSetting {
+### model SystemSetting {
 -  id          String   @id @default(uuid())
 -  key         String   @unique
 -  value       String
